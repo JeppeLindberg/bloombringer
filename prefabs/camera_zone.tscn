@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyah2ec5xttut"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbgi4"]
+size = Vector3(7.08484, 2.55316, 5.65601)
+
+[node name="camera_zone" type="Area3D"]
+
+[node name="shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.352722, 0.193024, -0.0911865)
+shape = SubResource("BoxShape3D_tbgi4")
+
+[node name="camera_marker" type="Marker3D" parent="."]
+transform = Transform3D(0.862257, -0.382557, 0.331907, 0, 0.655334, 0.755339, -0.50647, -0.651297, 0.565067, 1.47861, 3.74216, 2.62746)
+gizmo_extents = 1.0

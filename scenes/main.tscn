@@ -1,0 +1,102 @@
+[gd_scene load_steps=16 format=3 uid="uid://b40u733lync73"]
+
+[ext_resource type="Texture2D" uid="uid://dcpmlw8k6fqqo" path="res://textures/kenney_prototype-textures/PNG/Dark/texture_06.png" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dvwtpxc3rdw8q" path="res://prefabs/player.tscn" id="1_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://dm27m5qj42fo6" path="res://textures/kenney_prototype-textures/PNG/Purple/texture_09.png" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://ymjtai6o5bne" path="res://textures/kenney_prototype-textures/PNG/Orange/texture_09.png" id="2_sugp2"]
+[ext_resource type="Texture2D" uid="uid://b8lyss34enf6i" path="res://textures/kenney_prototype-textures/PNG/Light/texture_07.png" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://dgimducq7cb6e" path="res://scripts/camera_zones.gd" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://c7us8p4kcdj4m" path="res://scripts/camera.gd" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://dyah2ec5xttut" path="res://prefabs/camera_zone.tscn" id="7_tipki"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o5qli"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_0wfyh"]
+sky_material = SubResource("ProceduralSkyMaterial_o5qli")
+
+[sub_resource type="Environment" id="Environment_sugp2"]
+background_mode = 1
+sky = SubResource("Sky_0wfyh")
+ambient_light_source = 2
+ambient_light_color = Color(0.576471, 0.576471, 0.929412, 1)
+ambient_light_energy = 0.1
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
+albedo_texture = ExtResource("2_sugp2")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+albedo_texture = ExtResource("2_jyhfs")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tefeu"]
+albedo_texture = ExtResource("3_jyhfs")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
+albedo_texture = ExtResource("1_o5qli")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+texture_filter = 0
+
+[node name="main" type="Node3D"]
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sugp2")
+
+[node name="entities" type="Node3D" parent="."]
+
+[node name="player" parent="entities" node_paths=PackedStringArray("camera") instance=ExtResource("1_tbgi4")]
+camera = NodePath("../../camera")
+
+[node name="static" type="Node3D" parent="."]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="static"]
+transform = Transform3D(0.657138, 0, 0.75377, 0, 1, 0, -0.75377, 0, 0.657138, -2.56692, 0.5, -1.49567)
+material_override = SubResource("StandardMaterial3D_0wfyh")
+use_collision = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="static"]
+transform = Transform3D(0.132343, 0, 0.991204, 0, 1, 0, -0.991204, 0, 0.132343, -2.18191, 0.75, 1.84606)
+material_override = SubResource("StandardMaterial3D_tbgi4")
+use_collision = true
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="static"]
+transform = Transform3D(0.81835, 0, 0.57472, 0, 1, 0, -0.57472, 0, 0.81835, 1.87478, 0.5, -2.09944)
+material_override = SubResource("StandardMaterial3D_tefeu")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = SubResource("StandardMaterial3D_sugp2")
+use_collision = true
+size = Vector3(100, 0.5, 100)
+
+[node name="camera_zones" type="Node3D" parent="." node_paths=PackedStringArray("camera", "follow_node")]
+script = ExtResource("6_tefeu")
+camera = NodePath("../camera")
+follow_node = NodePath("../entities/player")
+
+[node name="camera_zone" parent="camera_zones" instance=ExtResource("7_tipki")]
+
+[node name="camera_zone2" parent="camera_zones" instance=ExtResource("7_tipki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.68141, 4.76837e-07, -0.0137029)
+
+[node name="camera" type="Camera3D" parent="."]
+transform = Transform3D(0.862257, -0.382557, 0.331907, 0, 0.655334, 0.755339, -0.50647, -0.651297, 0.565067, 1.47861, 3.74216, 2.62746)
+script = ExtResource("7_o6xl0")
