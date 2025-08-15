@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=4 uid="uid://dvwtpxc3rdw8q"]
+[gd_scene load_steps=17 format=4 uid="uid://dvwtpxc3rdw8q"]
 
 [ext_resource type="Script" uid="uid://cxapss8kms8m7" path="res://scripts/player.gd" id="1_4dohe"]
+[ext_resource type="Script" uid="uid://u0bnykuj5orb" path="res://scripts/interact_area.gd" id="2_4dohe"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fp3wc"]
 height = 1.0
@@ -3445,25 +3446,31 @@ _data = {
 &"walking": SubResource("Animation_1lr1m")
 }
 
-[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("visuals", "animation_player")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_72ieh"]
+radius = 0.723844
+
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("turn_pivot", "animation_player", "interact_area")]
 script = ExtResource("1_4dohe")
-visuals = NodePath("visual")
-animation_player = NodePath("visual/mixamo_base/AnimationPlayer")
+turn_pivot = NodePath("turn_pivot")
+animation_player = NodePath("turn_pivot/visual/mixamo_base/AnimationPlayer")
+interact_area = NodePath("turn_pivot/interact_area")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_fp3wc")
 
-[node name="visual" type="Node3D" parent="."]
+[node name="turn_pivot" type="Node3D" parent="."]
+
+[node name="visual" type="Node3D" parent="turn_pivot"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="mixamo_base" type="Node3D" parent="visual"]
+[node name="mixamo_base" type="Node3D" parent="turn_pivot/visual"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="visual/mixamo_base"]
+[node name="Armature" type="Node3D" parent="turn_pivot/visual/mixamo_base"]
 transform = Transform3D(0.01, 0, 0, 0, -1.19209e-09, -0.01, 0, 0.01, -1.19209e-09, 0, 0, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="visual/mixamo_base/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="turn_pivot/visual/mixamo_base/Armature"]
 bones/0/name = "mixamorig_Hips"
 bones/0/parent = -1
 bones/0/rest = Transform3D(0.995185, 0.0944064, 0.0263392, -0.025964, -0.00520039, 0.999649, 0.0945103, -0.99552, -0.00272418, 0.488853, 1.55639, -101.607)
@@ -3920,18 +3927,26 @@ bones/64/position = Vector3(1.38052e-06, 9.27814, 1.58684e-07)
 bones/64/rotation = Quaternion(-1.67117e-08, -0.0118691, -4.98073e-10, 0.99993)
 bones/64/scale = Vector3(1, 1, 1)
 
-[node name="Beta_Joints" type="MeshInstance3D" parent="visual/mixamo_base/Armature/Skeleton3D"]
+[node name="Beta_Joints" type="MeshInstance3D" parent="turn_pivot/visual/mixamo_base/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_k5a5g")
 skin = SubResource("Skin_04esk")
 
-[node name="Beta_Surface" type="MeshInstance3D" parent="visual/mixamo_base/Armature/Skeleton3D"]
+[node name="Beta_Surface" type="MeshInstance3D" parent="turn_pivot/visual/mixamo_base/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_dski5")
 skin = SubResource("Skin_04esk")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="visual/mixamo_base"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="turn_pivot/visual/mixamo_base"]
 libraries = {
 &"": SubResource("AnimationLibrary_t8544")
 }
+
+[node name="interact_area" type="Area3D" parent="turn_pivot" node_paths=PackedStringArray("shape")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.594638, -0.742322)
+script = ExtResource("2_4dohe")
+shape = NodePath("shape")
+
+[node name="shape" type="CollisionShape3D" parent="turn_pivot/interact_area"]
+shape = SubResource("SphereShape3D_72ieh")
 
 [node name="light" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.54825, 0)

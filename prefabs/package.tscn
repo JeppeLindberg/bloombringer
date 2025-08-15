@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxchrr5xh8eji"]
+
+[ext_resource type="Script" uid="uid://l7wj3dhlytp6" path="res://scripts/package.gd" id="1_e3dqo"]
+[ext_resource type="Texture2D" uid="uid://cu6sk55pmyg8w" path="res://textures/kenney_prototype-textures/PNG/Red/texture_10.png" id="2_ah1l4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y2wc"]
+albedo_texture = ExtResource("2_ah1l4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tipki"]
+height = 0.727539
+
+[node name="package" type="StaticBody3D"]
+script = ExtResource("1_e3dqo")
+
+[node name="visual" type="Node3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="visual"]
+radius = 0.443089
+material = SubResource("StandardMaterial3D_1y2wc")
+
+[node name="shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124512, 0)
+shape = SubResource("CylinderShape3D_tipki")

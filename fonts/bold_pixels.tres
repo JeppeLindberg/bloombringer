@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cpil70s2kodsf"]
+
+[ext_resource type="FontFile" uid="uid://bfdinul7nopoh" path="res://fonts/BoldPixels.ttf" id="1_yshqc"]
+
+[resource]
+default_font = ExtResource("1_yshqc")
+default_font_size = 32
