@@ -67,8 +67,9 @@ environment = SubResource("Environment_sugp2")
 [node name="player" parent="world/entities" node_paths=PackedStringArray("camera") instance=ExtResource("1_tbgi4")]
 camera = NodePath("../../camera")
 
-[node name="package" parent="world/entities" instance=ExtResource("2_ya4ey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14407, 0.305418, -2.55931)
+[node name="package" parent="world/entities" node_paths=PackedStringArray("player") instance=ExtResource("2_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14407, 0.0034194, -2.55931)
+player = NodePath("../player")
 
 [node name="static" type="Node3D" parent="world"]
 

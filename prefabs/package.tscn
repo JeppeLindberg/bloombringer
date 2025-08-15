@@ -17,9 +17,10 @@ script = ExtResource("1_e3dqo")
 [node name="visual" type="Node3D" parent="."]
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.449454, 0)
 radius = 0.443089
 material = SubResource("StandardMaterial3D_1y2wc")
 
 [node name="shape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124512, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462243, 0)
 shape = SubResource("CylinderShape3D_tipki")
