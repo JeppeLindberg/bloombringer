@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var interact_area: Node3D
 @export var carrying: Node3D
 @export var stop_carrying_raycast: RayCast3D
+@export var balance: Node3D
 
 @onready var entities = get_node('/root/main/world/entities')
 @onready var debug = get_node('/root/main/ui/debug')
@@ -17,7 +18,7 @@ const JUMP_VELOCITY = 4.5
 
 
 func _process(_delta: float) -> void:
-	debug.draw_text.append(interact_area.current_interactable)
+	debug.add_draw_text(interact_area.current_interactable)
 	_handle_interact()
 
 func _physics_process(delta: float) -> void:
