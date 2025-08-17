@@ -12,3 +12,5 @@ Tilføjede barebones balance system til spiller karakter
 
 Tilføjede center of mass udregning
 Ændrede hvordan venstre/højre balance bliver udregnet
+Tilføjdede hvordan balance virker visuelt
+

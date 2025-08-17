@@ -3451,26 +3451,27 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_72ieh"]
 radius = 0.723844
 
-[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("turn_pivot", "animation_player", "interact_area", "carrying", "stop_carrying_raycast", "balance")]
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("turn_pivot", "visual", "animation_player", "interact_area", "carrying", "stop_carrying_raycast", "balance")]
 script = ExtResource("1_4dohe")
 turn_pivot = NodePath("turn_pivot")
+visual = NodePath("turn_pivot/visual")
 animation_player = NodePath("turn_pivot/visual/mixamo_base/AnimationPlayer")
 interact_area = NodePath("turn_pivot/interact_area")
-carrying = NodePath("turn_pivot/carrying")
+carrying = NodePath("turn_pivot/visual/carrying")
 stop_carrying_raycast = NodePath("turn_pivot/stop_carrying_raycast")
 balance = NodePath("balance")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_fp3wc")
 
 [node name="turn_pivot" type="Node3D" parent="."]
 
-[node name="carrying" type="Node3D" parent="turn_pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.858423, 0.126365)
-
 [node name="visual" type="Node3D" parent="turn_pivot"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="carrying" type="Node3D" parent="turn_pivot/visual"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1.71685, 0.126365)
 
 [node name="mixamo_base" type="Node3D" parent="turn_pivot/visual"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)

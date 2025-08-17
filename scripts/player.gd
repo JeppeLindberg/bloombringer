@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var camera: Camera3D
 @export var turn_pivot: Node3D
+@export var visual: Node3D
 @export var animation_player: AnimationPlayer
 @export var interact_area: Node3D
 @export var carrying: Node3D
@@ -10,9 +11,11 @@ extends CharacterBody3D
 
 @onready var entities = get_node('/root/main/world/entities')
 @onready var debug = get_node('/root/main/ui/debug')
+@onready var main = get_node('/root/main')
 
 var input_dir = Vector3.ZERO
 var forward = Vector3.FORWARD
+var left = Vector3.LEFT
 
 const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
@@ -20,7 +23,13 @@ const JUMP_VELOCITY = 4.5
 
 func _process(_delta: float) -> void:
 	debug.add_text(interact_area.current_interactable)
+
+	_update_tilt()
+
 	_handle_interact()
+
+func _update_tilt():
+	visual.rotation_degrees.z = balance.balance_x * 45.0
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -28,8 +37,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	# if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	# 	velocity.y = JUMP_VELOCITY
 		
 	_handle_movement()
 
@@ -48,6 +57,7 @@ func _handle_movement():
 
 		turn_pivot.look_at(global_position + direction)
 		forward = direction
+		left = direction.rotated(Vector3.UP, deg_to_rad(90.0))
 		velocity.x = direction.x * calculated_speed
 		velocity.z = direction.z * calculated_speed
 	else:

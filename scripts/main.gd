@@ -29,3 +29,8 @@ func _get_children_in_groups_recursive(node, groups):
 
 		_get_children_in_groups_recursive(child, groups)
 
+
+func closest_pos_on_line(source_pos, direction, dest_pos):    
+	var diff = (dest_pos - source_pos).dot(direction) / direction.dot(direction)
+	var closest_pos = source_pos + diff * direction
+	return closest_pos
