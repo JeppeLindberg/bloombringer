@@ -12,13 +12,14 @@ extends CharacterBody3D
 @onready var debug = get_node('/root/main/ui/debug')
 
 var input_dir = Vector3.ZERO
+var forward = Vector3.FORWARD
 
 const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 
 
 func _process(_delta: float) -> void:
-	debug.add_draw_text(interact_area.current_interactable)
+	debug.add_text(interact_area.current_interactable)
 	_handle_interact()
 
 func _physics_process(delta: float) -> void:
@@ -46,6 +47,7 @@ func _handle_movement():
 			animation_player.play('walking')
 
 		turn_pivot.look_at(global_position + direction)
+		forward = direction
 		velocity.x = direction.x * calculated_speed
 		velocity.z = direction.z * calculated_speed
 	else:

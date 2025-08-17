@@ -11,3 +11,4 @@ Tilføjede barebones balance system til spiller karakter
 - 25-08-17
 
 Tilføjede center of mass udregning
+Ændrede hvordan venstre/højre balance bliver udregnet

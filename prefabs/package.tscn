@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxchrr5xh8eji"]
+[gd_scene load_steps=6 format=3 uid="uid://dxchrr5xh8eji"]
 
 [ext_resource type="Script" uid="uid://l7wj3dhlytp6" path="res://scripts/package.gd" id="1_e3dqo"]
 [ext_resource type="Texture2D" uid="uid://cu6sk55pmyg8w" path="res://textures/kenney_prototype-textures/PNG/Red/texture_10.png" id="2_ah1l4"]
+[ext_resource type="Script" uid="uid://cfk41f6iwm1ot" path="res://scripts/weight.gd" id="3_1y2wc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y2wc"]
 albedo_texture = ExtResource("2_ah1l4")
@@ -24,3 +25,7 @@ material = SubResource("StandardMaterial3D_1y2wc")
 [node name="shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462243, 0)
 shape = SubResource("CylinderShape3D_tipki")
+
+[node name="weight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0184615, 0.456417, 0)
+script = ExtResource("3_1y2wc")
