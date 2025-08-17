@@ -58,6 +58,9 @@ func _handle_movement():
 func _is_carrying():
 	return len(carrying.get_children()) > 0
 
+func is_walking():
+	return (velocity * Vector3(1.0, 0.0, 1.0)) != Vector3.ZERO
+
 func _handle_interact():
 	if Input.is_action_just_pressed('interact'):
 		var interactable = interact_area.current_interactable

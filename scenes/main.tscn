@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://b40u733lync73"]
+[gd_scene load_steps=20 format=3 uid="uid://b40u733lync73"]
 
+[ext_resource type="Script" uid="uid://c06tk3y52kiy2" path="res://scripts/main.gd" id="1_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dcpmlw8k6fqqo" path="res://textures/kenney_prototype-textures/PNG/Dark/texture_06.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://dvwtpxc3rdw8q" path="res://prefabs/player.tscn" id="1_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dm27m5qj42fo6" path="res://textures/kenney_prototype-textures/PNG/Purple/texture_09.png" id="2_jyhfs"]
@@ -51,6 +52,7 @@ uv1_triplanar = true
 texture_filter = 0
 
 [node name="main" type="Node"]
+script = ExtResource("1_eb6dy")
 
 [node name="world" type="Node3D" parent="."]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=4 uid="uid://dvwtpxc3rdw8q"]
+[gd_scene load_steps=19 format=4 uid="uid://dvwtpxc3rdw8q"]
 
 [ext_resource type="Script" uid="uid://cxapss8kms8m7" path="res://scripts/player.gd" id="1_4dohe"]
 [ext_resource type="Script" uid="uid://u0bnykuj5orb" path="res://scripts/interact_area.gd" id="2_4dohe"]
+[ext_resource type="Script" uid="uid://cfk41f6iwm1ot" path="res://scripts/weight.gd" id="3_1txc5"]
 [ext_resource type="Script" uid="uid://dwtn6hv83bw0f" path="res://scripts/balance.gd" id="3_r66lb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fp3wc"]
@@ -3965,11 +3966,18 @@ light_energy = 3.0
 omni_range = 6.0
 omni_attenuation = 0.0
 
-[node name="balance" type="Node3D" parent="." node_paths=PackedStringArray("player", "trip_point")]
+[node name="weight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.552659, 0)
+script = ExtResource("3_1txc5")
+
+[node name="center_of_mass" type="Node3D" parent="."]
+
+[node name="balance" type="Node3D" parent="." node_paths=PackedStringArray("player", "trip_point", "center_of_mass")]
 top_level = true
 script = ExtResource("3_r66lb")
 player = NodePath("..")
 trip_point = NodePath("trip_point")
+center_of_mass = NodePath("../center_of_mass")
 
 [node name="trip_point" type="Node3D" parent="balance"]
 top_level = true
