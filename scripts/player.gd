@@ -16,6 +16,7 @@ extends CharacterBody3D
 var input_dir = Vector3.ZERO
 var forward = Vector3.FORWARD
 var left = Vector3.LEFT
+var in_control = true
 
 const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
@@ -25,8 +26,15 @@ func _process(_delta: float) -> void:
 	debug.add_text(interact_area.current_interactable)
 
 	_update_tilt()
-
 	_handle_interact()
+
+func _handle_interact():
+	if Input.is_action_just_pressed('interact'):
+		var interactable = interact_area.current_interactable
+		if interactable != null:
+			interactable.interact()
+	if Input.is_action_just_released('interact') and _is_carrying():
+		stop_carrying()
 
 func _update_tilt():
 	visual.rotation_degrees.z = balance.balance_x * 45.0
@@ -49,10 +57,14 @@ func _handle_movement():
 	if _is_carrying():
 		calculated_speed *= 0.5
 
-	input_dir = Input.get_vector("left", "right", "up", "down")
+	if in_control:
+		input_dir = Input.get_vector("left", "right", "up", "down")
+	else:
+		input_dir = Vector3.ZERO
+
 	var direction := ((camera.global_basis * Vector3(input_dir.x, 0, input_dir.y)) * Vector3(1.0, 0.0, 1.0)) .normalized()
 	if direction:
-		if animation_player.current_animation != 'walking':
+		if in_control and (animation_player.current_animation != 'walking'):
 			animation_player.play('walking')
 
 		turn_pivot.look_at(global_position + direction)
@@ -61,7 +73,7 @@ func _handle_movement():
 		velocity.x = direction.x * calculated_speed
 		velocity.z = direction.z * calculated_speed
 	else:
-		if animation_player.current_animation != 'idle':
+		if in_control and (animation_player.current_animation != 'idle'):
 			animation_player.play('idle')
 
 		velocity.x = move_toward(velocity.x, 0, calculated_speed)
@@ -72,14 +84,6 @@ func _is_carrying():
 
 func is_walking():
 	return (velocity * Vector3(1.0, 0.0, 1.0)) != Vector3.ZERO
-
-func _handle_interact():
-	if Input.is_action_just_pressed('interact'):
-		var interactable = interact_area.current_interactable
-		if interactable != null:
-			interactable.interact()
-	if Input.is_action_just_released('interact') and _is_carrying():
-		stop_carrying()
 
 func set_carrying(node):
 	set_collision_disabled(node, true)
@@ -98,3 +102,13 @@ func set_collision_disabled(node, disabled):
 	for child in node.get_children():
 		if child is CollisionShape3D:
 			child.disabled = disabled
+
+func trip():
+	if animation_player.current_animation != 'get_up':
+		in_control = false
+		stop_carrying()
+		animation_player.play('get_up')
+
+func _on_animation_player_animation_finished(anim_name:StringName) -> void:
+	if anim_name == 'get_up':
+		in_control = true

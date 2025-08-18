@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b40u733lync73"]
+[gd_scene load_steps=22 format=3 uid="uid://b40u733lync73"]
 
 [ext_resource type="Script" uid="uid://c06tk3y52kiy2" path="res://scripts/main.gd" id="1_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dcpmlw8k6fqqo" path="res://textures/kenney_prototype-textures/PNG/Dark/texture_06.png" id="1_o5qli"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dgimducq7cb6e" path="res://scripts/camera_zones.gd" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://c7us8p4kcdj4m" path="res://scripts/camera.gd" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dyah2ec5xttut" path="res://prefabs/camera_zone.tscn" id="7_tipki"]
+[ext_resource type="Texture2D" uid="uid://b8gh0fxv3v5i6" path="res://textures/kenney_prototype-textures/PNG/Dark/texture_09.png" id="8_trceg"]
 [ext_resource type="Theme" uid="uid://d0bbkbg5ff4qr" path="res://fonts/bold_pixels_small.tres" id="10_ya4ey"]
 [ext_resource type="Script" uid="uid://b0i18l0xnfa8f" path="res://scripts/debug.gd" id="11_ya4ey"]
 
@@ -51,6 +52,11 @@ uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 texture_filter = 0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eb6dy"]
+albedo_texture = ExtResource("8_trceg")
+uv1_triplanar = true
+texture_filter = 0
+
 [node name="main" type="Node"]
 script = ExtResource("1_eb6dy")
 
@@ -67,6 +73,7 @@ environment = SubResource("Environment_sugp2")
 [node name="entities" type="Node3D" parent="world"]
 
 [node name="player" parent="world/entities" node_paths=PackedStringArray("camera") instance=ExtResource("1_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.5, 6)
 camera = NodePath("../../camera")
 
 [node name="package" parent="world/entities" node_paths=PackedStringArray("player") instance=ExtResource("2_ya4ey")]
@@ -98,12 +105,27 @@ material_override = SubResource("StandardMaterial3D_sugp2")
 use_collision = true
 size = Vector3(100, 0.5, 100)
 
+[node name="CSGBox3D5" type="CSGBox3D" parent="world/static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.25, 7.5)
+material_override = SubResource("StandardMaterial3D_eb6dy")
+use_collision = true
+size = Vector3(8, 0.5, 7)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="world/static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 3.25, 2)
+material_override = SubResource("StandardMaterial3D_eb6dy")
+use_collision = true
+size = Vector3(1, 0.5, 4)
+
 [node name="camera_zones" type="Node3D" parent="world" node_paths=PackedStringArray("camera", "follow_node")]
 script = ExtResource("6_tefeu")
 camera = NodePath("../camera")
 follow_node = NodePath("../entities/player")
 
 [node name="camera_zone" parent="world/camera_zones" instance=ExtResource("7_tipki")]
+
+[node name="camera_zone3" parent="world/camera_zones" instance=ExtResource("7_tipki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.5, 5.5)
 
 [node name="camera_zone2" parent="world/camera_zones" instance=ExtResource("7_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.68141, 4.76837e-07, -0.0137029)

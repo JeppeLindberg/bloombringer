@@ -14,3 +14,8 @@ Tilføjede center of mass udregning
 Ændrede hvordan venstre/højre balance bliver udregnet
 Tilføjdede hvordan balance virker visuelt
 
+- 25-08-18
+
+Tilføjdede system til at falde
+Fixede opførsel hvis spiller ikke starter i 0,0,0
+
