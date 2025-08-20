@@ -19,3 +19,8 @@ Tilføjdede hvordan balance virker visuelt
 Tilføjdede system til at falde
 Fixede opførsel hvis spiller ikke starter i 0,0,0
 
+- 25-08-19
+
+Lavede en sketch af starter området
+
+
