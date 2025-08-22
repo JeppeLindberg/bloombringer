@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://y7hd4a7jlr4q"]
+
+[ext_resource type="Theme" uid="uid://d0bbkbg5ff4qr" path="res://fonts/bold_pixels_small.tres" id="1_8vfq4"]
+[ext_resource type="Script" uid="uid://cokx1gpwo30ai" path="res://scripts/ui_dialog_bubble.gd" id="1_vru53"]
+
+[node name="bubble" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vru53")
+
+[node name="label" type="RichTextLabel" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_8vfq4")
+bbcode_enabled = true
+text = "TEST"
+horizontal_alignment = 1
+vertical_alignment = 2

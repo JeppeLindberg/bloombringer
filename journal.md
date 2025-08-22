@@ -30,3 +30,7 @@ Lavede en del af det første område
 - 25-08-22
 
 Lavede videre på første område
+
+- 25-08-22
+
+Lavede grundlaget for dialog med karakterer

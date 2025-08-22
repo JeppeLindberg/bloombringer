@@ -7,7 +7,7 @@ var current_interactable = null
 
 func _process(_delta: float) -> void:
 	current_interactable = null
-	var nodes = get_nodes_in_shape(shape)
+	var nodes = get_nodes_in_shape()
 
 	_sort_distance_target_pos = shape.global_position
 	nodes.sort_custom(_sort_distance)
@@ -22,7 +22,7 @@ func _sort_distance(a, b):
 		return true
 	return false
 
-func get_nodes_in_shape(shape):
+func get_nodes_in_shape():
 	var shape_query = PhysicsShapeQueryParameters3D.new()
 	shape_query.shape = shape.shape
 	shape_query.transform = shape.global_transform

@@ -12,6 +12,7 @@ extends CharacterBody3D
 @onready var entities = get_node('/root/main/world/entities')
 @onready var debug = get_node('/root/main/ui/debug')
 @onready var main = get_node('/root/main')
+@onready var dialog = get_node('/root/main/ui/dialog')
 
 var input_dir = Vector3.ZERO
 var forward = Vector3.FORWARD
@@ -32,7 +33,7 @@ func _handle_interact():
 	if Input.is_action_just_pressed('interact'):
 		var interactable = interact_area.current_interactable
 		if interactable != null:
-			interactable.interact()
+			interactable.interact(self)
 	if Input.is_action_just_released('interact') and _is_carrying():
 		stop_carrying()
 
@@ -112,3 +113,7 @@ func trip():
 func _on_animation_player_animation_finished(anim_name:StringName) -> void:
 	if anim_name == 'get_up':
 		in_control = true
+
+
+func enter_dialog(dialog_array):
+	dialog.enter_dialog(dialog_array)
