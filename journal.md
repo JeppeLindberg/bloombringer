@@ -23,4 +23,10 @@ Fixede opførsel hvis spiller ikke starter i 0,0,0
 
 Lavede en sketch af starter området
 
+- 25-08-20
 
+Lavede en del af det første område
+
+- 25-08-22
+
+Lavede videre på første område
